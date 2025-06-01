@@ -56,10 +56,21 @@ list.addEventListener('click', async (e) => {
     const type =document.createElement('p');
     const taille =document.createElement('p');
     const poids = document.createElement('p');
-    const status = document.createElement('ul');
+    const statsList =document.createElement('p');
+    const stats = document.createElement('ul');
+    statsList.textContent = "status:";
     type.textContent = `type: ${data.types.map(t => t.type.name).join(', ')}`;
     taille.textContent= `Taille: ${data.height*10}cm`;
     poids.textContent = `Poids: ${data.weight / 10}kg`;
+    data.stats.forEach(
+      t => { 
+        const li = document.createElement("li");
+        li.textContent = `${t.stat.name} : ${t.base_stat}`;
+        stats.append(li);
+      });
+    statsList.append(stats);
+    console.log(stats.textContent);
+    
     
     const title = document.createElement("h3");
     title.textContent = data.species.name;
@@ -67,7 +78,7 @@ list.addEventListener('click', async (e) => {
     divInfo.append(type);
     divInfo.append(taille);
     divInfo.append(poids);
-    divInfo.append(status);
+    divInfo.append(statsList);
     divCard.append(divInfo);
     
     }
